@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#060608">
-<meta name="description" content="RENDER — a cinematic home for music.">
-<title>RENDER — Music, reimagined.</title>
+<meta name="theme-color" content="#07070a">
+<title>RENDER — Discover music differently</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -13,16 +12,21 @@
 <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
-<div class="background" aria-hidden="true"><div class="aurora aurora-a"></div><div class="aurora aurora-b"></div><div class="aurora aurora-c"></div><div class="vignette"></div><canvas id="scene"></canvas></div>
-<div class="grain" aria-hidden="true"></div>
-<header class="nav"><a class="brand" href="#top">RENDER<span>.</span></a><nav class="nav-links"><a href="#vision">Vision</a><a href="#world">The world</a><a href="#download">Download</a></nav><a class="nav-cta" href="#download">Get RENDER <span>↗</span></a></header>
-<main id="top">
-<section class="hero section-wrap"><div class="hero-copy reveal"><div class="eyebrow"><i></i> A different kind of music app</div><h1>Hear it.<br><em>Feel it.</em></h1><p class="hero-text">RENDER turns music into a visual world — quiet when it should be, alive when it matters, and built around the way music actually feels.</p><div class="hero-actions"><a class="button button-primary" href="#download">Discover RENDER <span>→</span></a><a class="text-link" href="#vision">See the vision <span>↓</span></a></div></div><div class="hero-meta reveal"><span>01</span><div></div><span>SCROLL TO EXPLORE</span></div></section>
-<section class="statement section-wrap reveal" id="vision"><p class="kicker">01 / Vision</p><h2>Less interface.<br><span>More atmosphere.</span></h2><p class="statement-text">No endless rows fighting for your attention. No noisy dashboard. Just a carefully designed space where the artwork, the sound and the moment can breathe.</p></section>
-<section class="world section-wrap" id="world"><div class="section-heading reveal"><div><p class="kicker">02 / The world</p><h2>A place for<br>your sound.</h2></div><p class="heading-note">Move your cursor.<br>The world responds.</p></div><div class="world-grid"><article class="world-card card-large reveal"><span>01</span><div><h3>Music becomes a space.</h3><p>Depth, light and motion turn a static screen into something you can inhabit.</p></div></article><article class="world-card reveal"><span>02</span><div><h3>Quiet by design.</h3><p>Every element has a reason to exist.</p></div></article><article class="world-card reveal"><span>03</span><div><h3>Made to be remembered.</h3><p>A visual identity for the records that stay with you.</p></div></article></div></section>
-<section class="closing section-wrap reveal" id="download"><p class="kicker">03 / RENDER</p><h2>Music deserves<br><em>a world.</em></h2><p>Coming soon. Built for people who listen differently.</p><a class="button button-primary" href="#top">Back to the beginning <span>↑</span></a></section>
+<div class="visual-bg"><canvas id="scene"></canvas><div class="glow glow-one"></div><div class="glow glow-two"></div><div class="fade"></div></div>
+<header class="topbar"><a class="logo" href="#home">render<span>_</span></a><nav><a class="active" href="#home">Home</a><a href="#discover">Discover</a><a href="#genres">Genres</a><a href="#about">About</a></nav><a class="top-button" href="#discover">Explore <b>↗</b></a></header>
+<main id="home">
+<section class="hero wrap">
+<div class="hero-left reveal"><p class="eyebrow"><i></i> MUSIC / REIMAGINED</p><h1>Listen<br><span>different.</span></h1><p class="lead">A cinematic home for the music you love. Discover sounds, artists and records through an experience built to feel as good as it looks.</p><div class="hero-actions"><a class="primary" href="#discover">Explore music <b>→</b></a><a class="plain" href="#about">What is RENDER?</a></div></div>
+<div class="hero-art" aria-hidden="true"><div class="orb"><div class="orb-inner"></div><div class="orb-ring r1"></div><div class="orb-ring r2"></div></div><div class="floating-card c1"><small>FEATURED</small><strong>Afterglow</strong><span>RENDER / 01</span></div><div class="floating-card c2"><small>NEW RELEASE</small><strong>Night Drive</strong><span>Various Artists</span></div></div>
+<div class="scroll-note">SCROLL <span></span> 01</div>
+</section>
+<section class="discover wrap" id="discover"><div class="section-top reveal"><div><p class="eyebrow">01 / DISCOVER</p><h2>What's playing<br><span>around you.</span></h2></div><p>Fresh sounds. Deep cuts.<br>Nothing you need to force.</p></div><div class="music-grid"><article class="album featured reveal"><div class="album-art art-one"><div class="art-symbol">R</div></div><div class="album-info"><span>FEATURED ALBUM</span><h3>Fragments of Light</h3><p>RENDER SELECTS · 2026</p></div><b class="arrow">↗</b></article><article class="album reveal"><div class="album-art art-two"><div class="art-symbol">01</div></div><div class="album-info"><span>NEW</span><h3>Midnight FM</h3><p>NEON / VOL. 01</p></div><b class="arrow">↗</b></article><article class="album reveal"><div class="album-art art-three"><div class="art-symbol">∞</div></div><div class="album-info"><span>CURATED</span><h3>Infinite Rooms</h3><p>VARIOUS ARTISTS</p></div><b class="arrow">↗</b></article></div></section>
+<section class="genres wrap" id="genres"><div class="genre-head reveal"><p class="eyebrow">02 / EXPLORE</p><h2>Find a frequency.</h2></div><div class="genre-list"><a class="genre reveal"><span>01</span><strong>Electronic</strong><i>↗</i></a><a class="genre reveal"><span>02</span><strong>Ambient</strong><i>↗</i></a><a class="genre reveal"><span>03</span><strong>Alternative</strong><i>↗</i></a><a class="genre reveal"><span>04</span><strong>Hip-Hop</strong><i>↗</i></a><a class="genre reveal"><span>05</span><strong>R&B</strong><i>↗</i></a></div></section>
+<section class="about wrap" id="about"><div class="about-number">03</div><div class="about-copy reveal"><p class="eyebrow">03 / THE IDEA</p><h2>Music first.<br><span>Everything else second.</span></h2><p>RENDER is designed around the feeling of finding something you didn't know you needed. Less clutter, stronger visuals, better discovery.</p><a class="primary" href="#home">Back to top <b>↑</b></a></div></section>
 </main>
-<footer class="footer section-wrap"><span>© 2026 RENDER</span><span>Music, reimagined.</span></footer>
-<script src="https://cdn.jsdelivr.net/npm/three@0.179.1/build/three.min.js"></script><script src="js/scene.js"></script><script src="js/main.js"></script>
+<footer class="footer wrap"><span>© 2026 RENDER</span><span>Made for people who listen.</span></footer>
+<script src="https://cdn.jsdelivr.net/npm/three@0.179.1/build/three.min.js"></script>
+<script src="js/scene.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
