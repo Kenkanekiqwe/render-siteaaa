@@ -1,21 +1,131 @@
 (() => {
-  const canvas=document.getElementById('scene');
-  if(!canvas||!window.THREE)return;
-  const scene=new THREE.Scene();
-  const camera=new THREE.PerspectiveCamera(40,innerWidth/innerHeight,.1,100);
-  camera.position.set(0,0,8);
-  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,powerPreference:'high-performance'});
-  renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setSize(innerWidth,innerHeight);renderer.outputColorSpace=THREE.SRGBColorSpace;
-  const world=new THREE.Group();scene.add(world);
-  const material=new THREE.MeshPhysicalMaterial({color:0x8e86ff,metalness:.72,roughness:.13,transmission:.16,thickness:1.6,clearcoat:1,clearcoatRoughness:.08,emissive:0x201b50,emissiveIntensity:.5});
-  const orb=new THREE.Mesh(new THREE.IcosahedronGeometry(1.48,5),material);world.add(orb);
-  const shell=new THREE.Mesh(new THREE.IcosahedronGeometry(1.7,2),new THREE.MeshBasicMaterial({color:0xd9d5ff,wireframe:true,transparent:true,opacity:.16}));world.add(shell);
-  const rings=[];[2,2.45,2.9].forEach((r,i)=>{const ring=new THREE.Mesh(new THREE.TorusGeometry(r,i===1?.012:.018,8,200),new THREE.MeshBasicMaterial({color:[0xb1aaff,0x6259c5,0xe7e4ff][i],transparent:true,opacity:.24-i*.04}));ring.rotation.set(.7+i*.42,.25+i*.55,i*.8);ring.userData.speed=(i===1?-1:1)*(.0005+i*.00012);world.add(ring);rings.push(ring)});
-  const count=innerWidth<700?520:950,pos=new Float32Array(count*3);
-  for(let i=0;i<count;i++){const r=4+Math.random()*6,a=Math.random()*Math.PI*2,b=Math.acos(2*Math.random()-1);pos[i*3]=r*Math.sin(b)*Math.cos(a);pos[i*3+1]=r*Math.cos(b);pos[i*3+2]=r*Math.sin(b)*Math.sin(a)}
-  const pg=new THREE.BufferGeometry();pg.setAttribute('position',new THREE.BufferAttribute(pos,3));scene.add(new THREE.Points(pg,new THREE.PointsMaterial({color:0xc9c5ff,size:.018,transparent:true,opacity:.5,depthWrite:false})));
-  scene.add(new THREE.AmbientLight(0x575170,1.5));const key=new THREE.PointLight(0xe0ddff,34,17);key.position.set(3,3,4);scene.add(key);const fill=new THREE.PointLight(0x675bff,25,14);fill.position.set(-4,-2,2);scene.add(fill);
-  let tx=0,ty=0,mx=0,my=0;addEventListener('pointermove',e=>{tx=(e.clientX/innerWidth-.5)*1.1;ty=(e.clientY/innerHeight-.5)*.75},{passive:true});
-  addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setSize(innerWidth,innerHeight)});
-  let t=0;function frame(){requestAnimationFrame(frame);t+=.008;mx+=(tx-mx)*.025;my+=(ty-my)*.025;orb.rotation.x=t*.12+my*.2;orb.rotation.y=t*.2+mx*.24;orb.rotation.z=Math.sin(t*.35)*.08;shell.rotation.y=-t*.12;world.position.x+=(mx*.3-world.position.x)*.035;world.position.y+=(-my*.22-world.position.y)*.035;world.rotation.z+=(mx*.025-world.rotation.z)*.02;rings.forEach(r=>r.rotation.z+=r.userData.speed);camera.position.x+=(mx*.25-camera.position.x)*.02;camera.position.y+=(-my*.16-camera.position.y)*.02;camera.lookAt(0,0,0);renderer.render(scene,camera)}frame();
+  const canvas = document.getElementById('scene');
+  if (!canvas || !window.THREE) return;
+
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x050509, 0.028);
+  const camera = new THREE.PerspectiveCamera(43, innerWidth / innerHeight, 0.1, 100);
+  camera.position.set(0, 0, 8.4);
+
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 1.6));
+  renderer.setSize(innerWidth, innerHeight);
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.08;
+
+  const world = new THREE.Group();
+  scene.add(world);
+
+  scene.add(new THREE.HemisphereLight(0xaaa5ff, 0x050507, 1.25));
+  const key = new THREE.PointLight(0x877dff, 38, 15);
+  key.position.set(3, 2.5, 4);
+  scene.add(key);
+  const cyan = new THREE.PointLight(0x5cdcff, 20, 14);
+  cyan.position.set(-4, -1.5, 1);
+  scene.add(cyan);
+
+  const orb = new THREE.Mesh(
+    new THREE.IcosahedronGeometry(1.72, 6),
+    new THREE.MeshPhysicalMaterial({
+      color: 0x7770ad,
+      metalness: 0.86,
+      roughness: 0.16,
+      clearcoat: 1,
+      clearcoatRoughness: 0.1,
+      transmission: 0.08,
+      thickness: 1.4,
+      emissive: 0x1b1738,
+      emissiveIntensity: 0.75
+    })
+  );
+  world.add(orb);
+
+  const shell = new THREE.Mesh(
+    new THREE.IcosahedronGeometry(1.93, 3),
+    new THREE.MeshBasicMaterial({ color: 0xd7d3ff, wireframe: true, transparent: true, opacity: 0.13 })
+  );
+  world.add(shell);
+
+  const glow = new THREE.Mesh(
+    new THREE.SphereGeometry(2.5, 48, 48),
+    new THREE.MeshBasicMaterial({ color: 0x7169ff, transparent: true, opacity: 0.035, side: THREE.BackSide })
+  );
+  world.add(glow);
+
+  const rings = [];
+  [2.15, 2.52, 2.9, 3.25].forEach((radius, i) => {
+    const ring = new THREE.Mesh(
+      new THREE.TorusGeometry(radius, i === 1 ? 0.008 : 0.012, 8, 240),
+      new THREE.MeshBasicMaterial({ color: i % 2 ? 0x65d9ff : 0x958aff, transparent: true, opacity: 0.22 - i * 0.025 })
+    );
+    ring.rotation.set(0.55 + i * 0.31, 0.25 + i * 0.43, i * 0.7);
+    ring.userData.speed = (i % 2 ? -1 : 1) * (0.00045 + i * 0.00012);
+    world.add(ring);
+    rings.push(ring);
+  });
+
+  const count = innerWidth < 700 ? 650 : 1300;
+  const positions = new Float32Array(count * 3);
+  for (let i = 0; i < count; i++) {
+    const radius = 4.5 + Math.random() * 10;
+    const a = Math.random() * Math.PI * 2;
+    const b = Math.acos(2 * Math.random() - 1);
+    positions[i * 3] = radius * Math.sin(b) * Math.cos(a);
+    positions[i * 3 + 1] = radius * Math.cos(b) * 0.7;
+    positions[i * 3 + 2] = radius * Math.sin(b) * Math.sin(a);
+  }
+  const particleGeo = new THREE.BufferGeometry();
+  particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  const particles = new THREE.Points(
+    particleGeo,
+    new THREE.PointsMaterial({ color: 0xd5d2ff, size: 0.016, transparent: true, opacity: 0.42, depthWrite: false })
+  );
+  scene.add(particles);
+
+  const pointer = new THREE.Vector2();
+  const smooth = new THREE.Vector2();
+  addEventListener('pointermove', e => {
+    pointer.x = (e.clientX / innerWidth - 0.5) * 1.15;
+    pointer.y = (e.clientY / innerHeight - 0.5) * 0.8;
+  }, { passive: true });
+
+  addEventListener('resize', () => {
+    camera.aspect = innerWidth / innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 1.6));
+    renderer.setSize(innerWidth, innerHeight);
+  });
+
+  let t = 0;
+  function frame() {
+    requestAnimationFrame(frame);
+    t += 0.006;
+    smooth.lerp(pointer, 0.022);
+
+    orb.rotation.x += 0.0011;
+    orb.rotation.y += 0.0022;
+    orb.rotation.z = Math.sin(t * 0.4) * 0.08 + smooth.x * -0.06;
+    shell.rotation.y -= 0.0014;
+    shell.rotation.x += 0.0006;
+    glow.scale.setScalar(1 + Math.sin(t * 1.7) * 0.035);
+
+    world.rotation.y += 0.0008;
+    world.position.x += (smooth.x * 0.34 - world.position.x) * 0.028;
+    world.position.y += (-smooth.y * 0.25 - world.position.y) * 0.028;
+    world.rotation.z += (smooth.x * 0.018 - world.rotation.z) * 0.018;
+
+    rings.forEach(r => { r.rotation.z += r.userData.speed; r.rotation.x += 0.00035; });
+    particles.rotation.y = t * 0.012;
+    particles.rotation.x = Math.sin(t * 0.25) * 0.025;
+
+    camera.position.x += (smooth.x * 0.32 - camera.position.x) * 0.018;
+    camera.position.y += (-smooth.y * 0.2 - camera.position.y) * 0.018;
+    camera.lookAt(0, 0, 0);
+
+    key.position.x = 3 + smooth.x * 2;
+    key.position.y = 2.5 - smooth.y * 1.5;
+    renderer.render(scene, camera);
+  }
+  frame();
 })();
