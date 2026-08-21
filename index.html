@@ -1,42 +1,88 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>RENDER — Music in motion</title>
-<meta name="description" content="A cinematic music experience built around sound.">
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-:root{--bg:#050507;--muted:#8b8994;--line:#ffffff16;--accent:#8d82ff}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:#f5f4f7;font-family:Inter,system-ui,sans-serif;overflow-x:hidden}button{font:inherit;border:0;cursor:pointer}.webgl{position:fixed;inset:0;z-index:-3}.vignette{position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(circle at 68% 42%,transparent 0,rgba(5,5,7,.08) 35%,rgba(5,5,7,.78) 100%)}.grain{position:fixed;inset:-50%;z-index:-1;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E');transform:rotate(8deg)}.nav{position:fixed;z-index:20;top:0;left:0;right:0;height:76px;padding:0 5vw;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(#050507e8,transparent);backdrop-filter:blur(10px)}.logo{font-size:20px;font-weight:800;letter-spacing:-.07em}.links{display:flex;gap:30px;color:#98959f;font-size:12px}.links a{color:inherit;text-decoration:none;transition:.2s}.links a:hover{color:white}.pill,.secondary{border:1px solid var(--line);background:#ffffff08;color:#eee;border-radius:999px;padding:10px 16px;font-size:12px}.hero{min-height:100vh;padding:130px 8vw 100px;display:flex;align-items:center;position:relative}.copy{max-width:650px}.eyebrow{display:flex;align-items:center;gap:9px;color:#aaa7b1;font-size:10px;text-transform:uppercase;letter-spacing:.18em;margin-bottom:25px}.eyebrow i{width:6px;height:6px;background:white;border-radius:50%;box-shadow:0 0 20px white}.title{font-size:clamp(68px,10vw,145px);line-height:.84;letter-spacing:-.09em;margin:0;font-weight:800}.title span{color:#74717d}.sub{max-width:520px;color:#98959f;font-size:15px;line-height:1.7;margin:32px 0}.actions{display:flex;gap:10px}.primary{padding:14px 20px;border-radius:12px;background:#f2f2f3;color:#070709;font-size:13px;font-weight:700}.secondary{border-radius:12px}.section{padding:110px 7vw 150px;position:relative}.head{display:flex;align-items:end;justify-content:space-between;margin-bottom:34px}.kicker{font-size:10px;color:#696671;letter-spacing:.18em;text-transform:uppercase}.section h2{font-size:clamp(38px,5.5vw,74px);letter-spacing:-.075em;margin:9px 0 0}.head p{color:#686570;font-size:12px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{height:330px;padding:24px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,#ffffff0a,#ffffff02);position:relative;overflow:hidden;transition:transform .4s,border-color .4s}.card:hover{transform:translateY(-8px);border-color:#ffffff2a}.card .num{color:#696671;font-size:10px}.card .orb{position:absolute;width:210px;height:210px;right:-70px;top:-80px;border-radius:50%;background:radial-gradient(circle,#8c83ff45,transparent 67%);filter:blur(10px)}.card h3{position:absolute;left:24px;bottom:62px;margin:0;font-size:26px;letter-spacing:-.06em}.card p{position:absolute;left:24px;right:24px;bottom:24px;margin:0;color:#77747f;font-size:12px;line-height:1.55}.player{position:fixed;z-index:30;left:50%;bottom:20px;transform:translateX(-50%);width:min(720px,calc(100% - 24px));padding:12px 14px;border:1px solid #ffffff1b;background:#0b0b0fdc;backdrop-filter:blur(24px);border-radius:18px;display:flex;align-items:center;gap:13px;box-shadow:0 25px 80px #0009}.cover{width:45px;height:45px;flex:none;border-radius:12px;background:conic-gradient(from 20deg,#8178ff,#17161e,#eeeaff,#8178ff);box-shadow:0 0 25px #8178ff33}.track{min-width:130px}.track b{font-size:12px}.track small{display:block;color:#66636d;font-size:9px;margin-top:4px}.wave{height:30px;display:flex;align-items:center;gap:2px;flex:1}.wave i{width:2px;height:var(--h);border-radius:2px;background:#d8d6df;opacity:.55;transform-origin:center;transition:height .08s}.play{width:40px;height:40px;flex:none;border-radius:50%;background:#f3f3f4;color:#070709;font-size:13px}.progress{position:absolute;left:16px;right:16px;bottom:3px;height:2px;background:#ffffff0d;border-radius:2px;overflow:hidden}.progress i{display:block;height:100%;width:0;background:#aaa3ff;transition:width .15s}.footer{padding:50px 7vw 125px;border-top:1px solid #ffffff0c;color:#625f69;font-size:11px;display:flex;justify-content:space-between}@media(max-width:850px){.links{display:none}.hero{padding-left:7vw}.cards{grid-template-columns:1fr}.card{height:280px}.title{font-size:clamp(62px,18vw,105px)}.wave{display:none}.player{bottom:9px}.footer{padding-bottom:100px}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07070a">
+  <meta name="description" content="RENDER — music in motion.">
+  <title>RENDER — Music in motion.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
-<canvas class="webgl" id="webgl"></canvas><div class="vignette"></div><div class="grain"></div>
-<nav class="nav"><div class="logo">RENDER</div><div class="links"><a href="#discover">Discover</a><a href="#experience">Experience</a><a href="#download">Download</a></div><button class="pill" onclick="scrollToId('download')">Get the app</button></nav>
-<section class="hero"><div class="copy"><div class="eyebrow"><i></i> A new way to listen</div><h1 class="title">Music<br><span>in motion.</span></h1><p class="sub">A focused music space for people who care about sound. Discover new records, build your world of music, and let every track become an experience.</p><div class="actions"><button class="primary" onclick="togglePlay()">Listen now ↗</button><button class="secondary" onclick="scrollToId('experience')">Explore RENDER</button></div></div></section>
-<section class="section" id="discover"><div class="head"><div><div class="kicker">01 / Discover</div><h2>Find your next sound.</h2></div><p>Curated, not crowded.</p></div><div class="cards"><article class="card"><span class="num">01</span><div class="orb"></div><h3>New releases</h3><p>Fresh records selected around what you actually listen to.</p></article><article class="card"><span class="num">02</span><div class="orb"></div><h3>Deep cuts</h3><p>Go beyond the algorithm and uncover music with character.</p></article><article class="card"><span class="num">03</span><div class="orb"></div><h3>Your space</h3><p>Playlists, albums and artists arranged around your taste.</p></article></div></section>
-<section class="section" id="experience"><div class="head"><div><div class="kicker">02 / Experience</div><h2>Designed around sound.</h2></div></div><div class="cards"><article class="card"><span class="num">A</span><div class="orb"></div><h3>Immersive UI</h3><p>Real-time 3D depth and motion that reacts naturally to your pointer.</p></article><article class="card"><span class="num">B</span><div class="orb"></div><h3>Pure playback</h3><p>Fast controls, clean typography and a player that stays out of your way.</p></article><article class="card"><span class="num">C</span><div class="orb"></div><h3>Built for creators</h3><p>A home for artists, releases and sounds that deserve attention.</p></article></div></section>
-<section class="section" id="download"><div class="head"><div><div class="kicker">03 / RENDER</div><h2>Press play.</h2></div><button class="primary" onclick="togglePlay()">Start listening</button></div></section>
-<footer class="footer"><span>© 2026 RENDER</span><span>Music in motion.</span></footer>
-<div class="player"><div class="cover"></div><div class="track"><b id="trackName">A moment in motion</b><small>RENDER / Featured</small></div><div class="wave" id="wave"></div><button class="play" id="play" onclick="togglePlay()">▶</button><div class="progress"><i id="progress"></i></div></div>
-<script type="module">
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js';
-const canvas=document.getElementById('webgl');
-const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio,1.8));renderer.setSize(innerWidth,innerHeight);renderer.outputColorSpace=THREE.SRGBColorSpace;
-const scene=new THREE.Scene();scene.fog=new THREE.FogExp2(0x050507,.055);const camera=new THREE.PerspectiveCamera(48,innerWidth/innerHeight,.1,100);camera.position.set(0,0,7);
-const group=new THREE.Group();scene.add(group);
-const geometry=new THREE.IcosahedronGeometry(1.65,5);const material=new THREE.MeshPhysicalMaterial({color:0x625ad0,metalness:.72,roughness:.16,transmission:.05,clearcoat:1,clearcoatRoughness:.12,emissive:0x15102d,emissiveIntensity:.7});const core=new THREE.Mesh(geometry,material);group.add(core);
-const wire=new THREE.Mesh(new THREE.IcosahedronGeometry(1.72,2),new THREE.MeshBasicMaterial({color:0xaaa4ff,wireframe:true,transparent:true,opacity:.1}));group.add(wire);
-const rings=[];for(let i=0;i<4;i++){const r=new THREE.Mesh(new THREE.TorusGeometry(2.05+i*.28,.006+i*.001,12,180),new THREE.MeshBasicMaterial({color:0xaaa4ff,transparent:true,opacity:.18-i*.025}));r.rotation.set(Math.random()*2,Math.random()*2,Math.random()*2);group.add(r);rings.push(r)}
-const starGeo=new THREE.BufferGeometry(),count=900,pos=new Float32Array(count*3);for(let i=0;i<count;i++){const r=8+Math.random()*15,a=Math.random()*Math.PI*2,b=Math.acos(2*Math.random()-1);pos[i*3]=r*Math.sin(b)*Math.cos(a);pos[i*3+1]=r*Math.sin(b)*Math.sin(a);pos[i*3+2]=r*Math.cos(b)}starGeo.setAttribute('position',new THREE.BufferAttribute(pos,3));scene.add(new THREE.Points(starGeo,new THREE.PointsMaterial({color:0xffffff,size:.018,transparent:true,opacity:.35})));
-let targetX=0,targetY=0,mx=0,my=0;addEventListener('pointermove',e=>{targetX=(e.clientX/innerWidth-.5)*.9;targetY=(e.clientY/innerHeight-.5)*.55});let energy=0;function render(t){mx+=(targetX-mx)*.035;my+=(targetY-my)*.035;group.rotation.y=t*.00013+mx*.35;group.rotation.x=t*.00008+my*.25;group.position.x=mx*.55;group.position.y=-my*.35;const pulse=1+energy*.13+.035*Math.sin(t*.001);core.scale.setScalar(pulse);wire.rotation.y=-t*.0002;rings.forEach((r,i)=>{r.rotation.x+=.00035*(i+1);r.rotation.y-=.00023*(i+1)});renderer.render(scene,camera);requestAnimationFrame(render)}requestAnimationFrame(render);
-addEventListener('resize',()=>{renderer.setSize(innerWidth,innerHeight);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix()});
-const wave=document.getElementById('wave'),bars=[];for(let i=0;i<46;i++){const b=document.createElement('i');b.style.setProperty('--h',(5+Math.random()*22)+'px');wave.appendChild(b);bars.push(b)}
-let audio=null,master=null,playing=false,start=0,raf=0;
-function setupAudio(){if(audio)return;audio=new (window.AudioContext||window.webkitAudioContext)();master=audio.createGain();master.gain.value=.055;master.connect(audio.destination)}
-function sound(){setupAudio();if(audio.state==='suspended')audio.resume();const now=audio.currentTime;[220,277.18,329.63,440].forEach((f,i)=>{const o=audio.createOscillator(),g=audio.createGain();o.type=i===0?'sine':'triangle';o.frequency.value=f;o.frequency.exponentialRampToValueAtTime(f*1.01,now+2.5);g.gain.setValueAtTime(0,now);g.gain.linearRampToValueAtTime(.18/(i+1),now+.12);g.gain.exponentialRampToValueAtTime(.001,now+2.8);o.connect(g);g.connect(master);o.start(now);o.stop(now+2.9)});}
-function animateAudio(){if(!playing)return;energy=.45+.35*Math.sin(performance.now()*.004);bars.forEach((b,i)=>b.style.height=(5+Math.abs(Math.sin(performance.now()*.004+i*.65))*22*(.45+energy))+'px');document.getElementById('progress').style.width=((performance.now()-start)%12000/12000*100)+'%';raf=requestAnimationFrame(animateAudio)}
-window.togglePlay=()=>{setupAudio();if(!playing){playing=true;start=performance.now();document.getElementById('play').textContent='Ⅱ';document.getElementById('trackName').textContent='Now playing — A moment in motion';sound();animateAudio()}else{playing=false;energy=0;document.getElementById('play').textContent='▶';document.getElementById('trackName').textContent='A moment in motion';cancelAnimationFrame(raf)}};
-window.scrollToId=id=>document.getElementById(id)?.scrollIntoView({behavior:'smooth'});
-</script>
+  <div class="webgl" aria-hidden="true"><canvas id="scene"></canvas></div>
+  <div class="noise" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="brand" href="#top" aria-label="RENDER home">RENDER</a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#discover">Discover</a>
+      <a href="#experience">Experience</a>
+      <a href="#download">Download</a>
+    </nav>
+    <a class="nav-cta" href="#download">Get the app</a>
+  </header>
+
+  <main id="top">
+    <section class="hero section-wrap">
+      <div class="hero-copy reveal">
+        <p class="eyebrow"><span></span> A new way to listen</p>
+        <h1>Music<br><em>in motion.</em></h1>
+        <p class="hero-text">A focused music space for people who care about sound. Discover records, build your world of music, and let every track become an experience.</p>
+        <div class="actions">
+          <button class="button button-primary" data-demo-play>Listen now <span>↗</span></button>
+          <a class="button button-ghost" href="#experience">Explore RENDER</a>
+        </div>
+      </div>
+      <div class="hero-status reveal" aria-hidden="true">
+        <span class="status-line"></span>
+        <span>LIVE VISUAL ENGINE</span>
+      </div>
+    </section>
+
+    <section class="section-wrap content-section" id="discover">
+      <div class="section-heading reveal">
+        <div><p class="kicker">01 / Discover</p><h2>Find your next sound.</h2></div>
+        <p>Curated, not crowded.</p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature reveal"><span>01</span><div><h3>New releases</h3><p>Fresh records selected around what you actually listen to.</p></div></article>
+        <article class="feature reveal"><span>02</span><div><h3>Deep cuts</h3><p>Go beyond the algorithm and uncover music with character.</p></div></article>
+        <article class="feature reveal"><span>03</span><div><h3>Your space</h3><p>Playlists, albums and artists arranged around your taste.</p></div></article>
+      </div>
+    </section>
+
+    <section class="section-wrap content-section" id="experience">
+      <div class="section-heading reveal"><div><p class="kicker">02 / Experience</p><h2>Designed around sound.</h2></div></div>
+      <div class="feature-grid experience-grid">
+        <article class="feature reveal"><span>A</span><div><h3>Immersive UI</h3><p>Subtle depth, motion and spatial visuals without turning the player into a gimmick.</p></div></article>
+        <article class="feature reveal"><span>B</span><div><h3>Pure playback</h3><p>Fast controls, clean typography and a player that stays out of your way.</p></div></article>
+        <article class="feature reveal"><span>C</span><div><h3>Built for creators</h3><p>A home for artists, releases and sounds that deserve attention.</p></div></article>
+      </div>
+    </section>
+
+    <section class="section-wrap download-section" id="download">
+      <div class="download-copy reveal"><p class="kicker">03 / RENDER</p><h2>Press play.</h2><p>Built for listening without the noise.</p></div>
+      <button class="button button-primary reveal" data-demo-play>Start listening</button>
+    </section>
+  </main>
+
+  <footer class="footer section-wrap"><span>© 2026 RENDER</span><span>Music in motion.</span></footer>
+
+  <div class="player" id="player">
+    <div class="cover-art" aria-hidden="true"><i></i></div>
+    <div class="track-meta"><strong id="track-title">A moment in motion</strong><small>RENDER / Featured</small></div>
+    <div class="waveform" id="waveform" aria-hidden="true"></div>
+    <span class="time" id="time">0:00</span>
+    <button class="play-button" id="play-button" aria-label="Play demo track">▶</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.179.1/build/three.min.js"></script>
+  <script src="js/scene.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
